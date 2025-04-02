@@ -1,7 +1,7 @@
-DROP TABLE IF EXISTS produit;
-DROP TABLE IF EXISTS stock_total;
-DROP TABLE IF EXISTS Achat;
 DROP TABLE IF EXISTS achat_produit;
+DROP TABLE IF EXISTS Achat;
+DROP TABLE IF EXISTS stock_total;
+DROP TABLE IF EXISTS produit;
 
 CREATE TABLE produit (
     id_produit INT AUTO_INCREMENT PRIMARY KEY,
@@ -24,8 +24,7 @@ CREATE TABLE Achat (
     id_achat INT AUTO_INCREMENT PRIMARY KEY,
     date_achat DATE NOT NULL,
     montant DECIMAL(10,2) NOT NULL,
-    fournisseur VARCHAR(100) NOT NULL,
-    FOREIGN KEY(id_produit) REFERENCES produit(id_produit) 
+    fournisseur VARCHAR(100) NOT NULL
 );
 
 
@@ -155,7 +154,7 @@ BEGIN
     DECLARE total_achats INT DEFAULT 0;
     DECLARE total_ventes INT DEFAULT 0;
 
-    --Total des achats poour ce produit (en utilsants table achat_produit)
+    -- Total des achats poour ce produit (en utilsants table achat_produit)
     SELECT IFNULL(SUM(quantite), 0) INTO total_achats
     FROM achat_produit
     WHERE id_produit = p_id_produit;
