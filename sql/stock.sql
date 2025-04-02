@@ -31,10 +31,10 @@ CREATE TABLE Achat (
 
 -- table de liaison achat-produit (relation plusieurs-plusieurs entre achats et produits )
 CREATE TABLE achat_produit (
-    id_achat_produit INT AUTO_INCREMENT PRIMARY KEY,
     id_achat INT NOT NULL,
     id_produit INT NOT NULL,
     quantite INT NOT NULL,
+    PRIMARY KEY (id_achat, id_produit),
     FOREIGN KEY(id_achat) REFERENCES achat(id_achat),
     FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
