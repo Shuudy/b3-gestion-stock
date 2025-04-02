@@ -7,7 +7,7 @@ BEGIN
 END //
 
 
-CREATE TRIGGER after_produit_insert
+CREATE TRIGGER after_produit_update
 AFTER UPDATE ON produit
 FOR EACH ROW
 BEGIN
@@ -15,7 +15,7 @@ BEGIN
 END //
 
 
-CREATE TRIGGER after_produit_insert
+CREATE TRIGGER after_produit_delete
 AFTER DELETE ON produit
 FOR EACH ROW
 BEGIN
