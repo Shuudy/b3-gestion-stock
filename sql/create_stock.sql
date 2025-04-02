@@ -4,10 +4,10 @@ DROP TABLE IF EXISTS stock_total;
 CREATE TABLE produit (
     id_produit INT AUTO_INCREMENT PRIMARY KEY,
     nom_produit VARCHAR(100) NOT NULL,
-    description VARCHAR(100), 
+    description VARCHAR(255), 
     quantite INT,
     prix DECIMAL(10,2) NOT NULL,
-    categorie VARCHAR(30),
+    categorie VARCHAR(50)
 );
 
 CREATE TABLE stock_total (
@@ -15,3 +15,4 @@ CREATE TABLE stock_total (
     total_stock INT NOT NULL,
     derniere_maj DATE NOT NULL
 );
+
