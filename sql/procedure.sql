@@ -2,7 +2,6 @@
 INSERT INTO stock_total (total_stock, derniere_maj) VALUES (0, CURDATE());
 
 
-
 -- Création de procédures stockées pour chaque élément d’un CRUD
 
 -- CRUD POUR produit
@@ -13,13 +12,13 @@ CREATE PROCEDURE ajouterProduit (
     IN p_description VARCHAR(100),
     IN p_quantite INT,
     IN p_prix DECIMAL(10,2),
-    IN p_categorie VARCHAR(30),
+    IN p_categorie VARCHAR(30)
 )
 BEGIN
     INSERT INTO produit (nom_produit, description, quantite, prix, categorie)
     VALUES (p_nom_produit, p_description, p_quantite, p_prix, p_categorie);
 END //
-DELIMITER;
+DELIMITER ;
 
 
 -- read
@@ -28,7 +27,7 @@ CREATE PROCEDURE obtenirProduits ()
 BEGIN
     SELECT * FROM produit;
 END //
-DELIMITER;
+DELIMITER ;
 
 
 -- updat
@@ -50,7 +49,7 @@ BEGIN
         categorie = p_categorie
     WHERE id_produit = p_id_produit;
 END //
-DELIMITER;
+DELIMITER ;
 
 
 -- delete
@@ -61,7 +60,7 @@ CREATE PROCEDURE supprimerProduit (
 BEGIN
     DELETE FROM produit WHERE id_produit = p_id_produit;
 END //
-DELIMITER;
+DELIMITER ;
 
 
 -- CRUD POUR stock_total
@@ -72,7 +71,7 @@ CREATE PROCEDURE obtenirStockTotal ()
 BEGIN
     SELECT * FROM stock_total WHERE id_stock_total = 1;
 END //
-DELIMITER;
+DELIMITER ;
 
 
 -- updat
@@ -86,7 +85,7 @@ BEGIN
         derniere_maj = CURDATE()
     WHERE id_stock_total = 1;
 END //
-DELIMITER;
+DELIMITER ;
 
 
 -- calculer et mettre à jour le stock total
@@ -103,3 +102,6 @@ BEGIN
     WHERE id_stock_total = 1;
 END //
 DELIMITER ;
+
+
+-- Pocédures pour accéder au données des autres modules (achat et ventes)
