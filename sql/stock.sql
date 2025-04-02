@@ -1,4 +1,37 @@
--- valeur iitiale dans stock_total afin de pouvoir mettre a jour 
+DROP TABLE IF EXISTS produit;
+DROP TABLE IF EXISTS stock_total;
+DROP TABLE IF EXISTS achat_produit;
+
+CREATE TABLE produit (
+    id_produit INT AUTO_INCREMENT PRIMARY KEY,
+    nom_produit VARCHAR(100) NOT NULL,
+    description VARCHAR(100), 
+    quantite INT,
+    prix DECIMAL(10,2) NOT NULL,
+    categorie VARCHAR(30)
+);
+
+CREATE TABLE stock_total (
+    id_stock_total INT AUTO_INCREMENT PRIMARY KEY,
+    total_stock INT NOT NULL,
+    derniere_maj DATE NOT NULL
+);
+
+
+-- table de liaison achat-produit (relation plusieurs-plusieurs entre achats et produits )
+CREATE TABLE achat_produit (
+    id_achat_produit INT AUTO_INCREMENT PRIMARY KEY,
+    id_achat INT NOT NULL,
+    id_produit INT NOT NULL,
+    quantite INT NOT NULL,
+    prix_unitaire DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY(id_achat) REFERENCES achat(id_achat),
+    FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
+);
+
+
+
+-- valeur initiale dans stock_total afin de pouvoir mettre a jour 
 INSERT INTO stock_total (total_stock, derniere_maj) VALUES (0, CURDATE());
 
 
@@ -64,7 +97,6 @@ DELIMITER ;
 
 
 -- CRUD POUR stock_total
-
 -- read
 DELIMITER //
 CREATE PROCEDURE obtenirStockTotal ()
@@ -105,3 +137,60 @@ DELIMITER ;
 
 
 -- Pocédures pour accéder au données des autres modules (achat et ventes)
+DELIMITER //
+CREATE PROCEDURE calculerStockProduit (
+    IN p_id_produit INT
+)
+BEGIN
+    DECLARE total_achats INT DEFAULT 0;
+    DECLARE total_ventes INT DEFAULT 0;
+
+    --Total des achats poour ce produit (en utilsants table achat_produit)
+    SELECT IFNULL(SUM(quantite), 0) INTO total_achats
+    FROM achat_produit
+    WHERE id_produit = p_id_produit;
+
+    -- Total des ventes pour ce produit (en utilisant table Ligne_bon) 
+    SELECT IFNULL(SUM(quantité), 0) INTO total_ventes
+    FROM Ligne_bon
+    WHERE Id_Produit = p_id_produit;
+
+    -- Mettre à jour le stock du produit
+    UPDATE produit
+    SET quantite = total_achats - total_ventes
+    WHERE id_produit = p_id_produit;
+
+    -- Mettre a jour le stock total 
+    CALL calculerStockTotal();
+END //
+DELIMITER ;
+
+
+
+-- Trigger
+
+DELIMITER //
+CREATE TRIGGER after_produit_insert
+AFTER INSERT ON produit
+FOR EACH ROW
+BEGIN
+    CALL calculerStockTotal();
+END //
+
+
+CREATE TRIGGER after_produit_update
+AFTER UPDATE ON produit
+FOR EACH ROW
+BEGIN
+    CALL calculerStockTotal();
+END //
+
+
+CREATE TRIGGER after_produit_delete
+AFTER DELETE ON produit
+FOR EACH ROW
+BEGIN
+    CALL calculerStockTotal();
+END //
+DELIMITER ;
+
