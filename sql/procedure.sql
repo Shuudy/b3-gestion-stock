@@ -10,10 +10,10 @@ INSERT INTO stock_total (total_stock, derniere_maj) VALUES (0, CURDATE());
 DELIMITER //
 CREATE PROCEDURE ajouterProduit (
     IN p_nom_produit VARCHAR(100),
-    IN p_description VARCHAR(255),
+    IN p_description VARCHAR(100),
     IN p_quantite INT,
     IN p_prix DECIMAL(10,2),
-    IN p_categorie VARCHAR(50),
+    IN p_categorie VARCHAR(30),
 )
 BEGIN
     INSERT INTO produit (nom_produit, description, quantite, prix, categorie)
@@ -36,10 +36,10 @@ DELIMITER //
 CREATE PROCEDURE mettreAJourProduit (
     IN p_id_produit INT,
     IN p_nom_produit VARCHAR(100),
-    IN p_description VARCHAR(255),
+    IN p_description VARCHAR(100),
     IN p_quantite INT,
     IN p_prix DECIMAL(10,2),
-    IN p_categorie VARCHAR(50)
+    IN p_categorie VARCHAR(30)
 )
 BEGIN
     UPDATE produit
