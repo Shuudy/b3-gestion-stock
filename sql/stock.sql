@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS produit;
 DROP TABLE IF EXISTS stock_total;
+DROP TABLE IF EXISTS Achat;
 DROP TABLE IF EXISTS achat_produit;
 
 CREATE TABLE produit (
@@ -18,13 +19,22 @@ CREATE TABLE stock_total (
 );
 
 
+-- achat
+CREATE TABLE Achat (
+    id_achat INT AUTO_INCREMENT PRIMARY KEY,
+    date_achat DATE NOT NULL,
+    montant DECIMAL(10,2) NOT NULL,
+    fournisseur VARCHAR(100) NOT NULL,
+    FOREIGN KEY(id_produit) REFERENCES produit(id_produit) 
+);
+
+
 -- table de liaison achat-produit (relation plusieurs-plusieurs entre achats et produits )
 CREATE TABLE achat_produit (
     id_achat_produit INT AUTO_INCREMENT PRIMARY KEY,
     id_achat INT NOT NULL,
     id_produit INT NOT NULL,
     quantite INT NOT NULL,
-    prix_unitaire DECIMAL(10,2) NOT NULL,
     FOREIGN KEY(id_achat) REFERENCES achat(id_achat),
     FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
