@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AchatRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,17 @@ class Achat
 
     #[ORM\Column(length: 100)]
     private ?string $fournisseur = null;
+
+    /**
+     * @var Collection<int, AchatProduit>
+     */
+    #[ORM\OneToMany(targetEntity: AchatProduit::class, mappedBy: 'produit')]
+    private Collection $achatProduits;
+
+    public function __construct()
+    {
+        $this->achatProduits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
