@@ -1,3 +1,183 @@
 body {
     background-color: skyblue;
+    margin: 0;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+h1 {
+    color: #444;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input, form select, form textarea {
+    /* width: 100%; */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+form button {
+    display: block;
+    /* width: 100%; */
+    padding: 5px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #218838;
+}
+
+.btn-view {
+    background-color: #17a2b8;
+    color: white;
+    border: 1px solid #17a2b8;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.btn-view:hover {
+    background-color: #138496;
+    color: white;
+}
+
+.btn-edit {
+    background-color: #dda602;
+    color: white;
+    border: 1px solid #dda602;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.btn-edit:hover {
+    background-color: #a17900;
+    color: white;
+}
+
+form .btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+form .btn-delete:hover {
+    background-color: #c82333;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #007bff;
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #e9ecef;
+}
+
+.table td a {
+    color: #fafcfd;
+    text-decoration: none;
+    font-weight: bold;
+    
+}
+
+.actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-back {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-back:hover {
+    background-color: #5a6268;
+}
+
+.btn-create {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-create:hover {
+    background-color: #218838;
 }

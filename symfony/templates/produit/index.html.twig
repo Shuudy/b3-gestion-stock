@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit index{% endblock %}
+{% block title %}Liste des produits{% endblock %}
 
 {% block body %}
-    <h1>Produit index</h1>
+    <h1>Liste des produits</h1>
 
     <table class="table">
         <thead>
@@ -27,8 +27,8 @@
                 <td>{{ produit.prix }}</td>
                 <td>{{ produit.categorie }}</td>
                 <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">Afficher</a>
-                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
+                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-view">Afficher</a>
+                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-edit">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_produit_new') }}">Créer un nouveau produit</a>
+    <a href="{{ path('app_produit_new') }}" class="btn btn-create">Créer un nouveau produit</a>
 {% endblock %}
